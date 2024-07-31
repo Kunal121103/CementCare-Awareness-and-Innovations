@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CementCare Awareness and Innovations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #00796b; /* Teal */
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1000; /* Ensure header is above other elements */
+        }
+        .menu-toggle {
+            display: none;
+            background-color: #00796b;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s;
+            display: block;
+        }
+        nav ul li a:hover {
+            color: #ffeb3b; /* Yellow */
+            transform: scale(1.1);
+        }
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #00796b;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li:hover > ul {
+            display: block;
+        }
+        nav ul ul li {
+            width: 200px; /* Adjust as needed */
+        }
+        nav ul ul li a {
+            padding: 10px;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav {
+                flex-direction: column;
+                align-items: stretch;
+                position: relative;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: #00796b;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            nav ul {
+                flex-direction: column;
+                padding: 0;
+                margin: 0;
+            }
+            nav ul li {
+                margin: 0;
+            }
+            nav ul li a {
+                padding: 15px;
+                display: block;
+                border-bottom: 1px solid #004d40; /* Darker Teal */
+            }
+            nav ul ul {
+                position: static;
+                display: none;
+            }
+            nav ul li.active > ul {
+                display: block;
+            }
+            .hero-image {
+                height: 300px;
+                font-size: 1.8rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-image {
+                height: 250px;
+                font-size: 1.5rem;
+            }
+        }
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #e74c3c;
+            text-align: center;
+            font-size: 1.75rem;
+            margin-bottom: 20px;
+        }
+        p, ul {
+            line-height: 1.8;
+            color: #555;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            background: url('https://shorturl.at/wtTIo') center center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            position: relative;
+            /* margin-top: 20px; Add margin to separate from header */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 121, 107, 0.6); /* Teal Overlay */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-overlay div {
+            margin: 10px 0;
+        }
+        .hero-overlay .headline {
+            font-size: 2rem; /* Responsive font size */
+            line-height: 1.2;
+            font-weight: bold;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        }
+        @media (max-width: 768px) {
+            .hero-overlay {
+                padding: 15px; /* Adjust padding for smaller screens */
+            }
+            .hero-overlay .headline {
+                font-size: 1.5rem; /* Smaller font size for smaller screens */
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-overlay {
+                padding: 10px; /* Further adjust padding for very small screens */
+            }
+            .hero-overlay .headline {
+                font-size: 1.2rem; /* Further reduce font size */
+            }
+        }
+        footer {
+            background-color: #00796b; /* Teal */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff5722; /* Deep Orange */
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #e64a19; /* Darker Orange */
+            transform: scale(1.05);
+        }
+        footer > p {
+            margin: 0;
+            color: #ffffff;
+        }
+        /* New CSS for section images
+        .section img.section-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* New CSS for Effects and Protection sections */
+        /* .section-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        } */ 
+
+        .section-with-image {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            /* new css added to reduce image height  */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-with-image img.beautiful-image {
+            flex: 1;
+            max-width: 30%; /* Adjust as needed */
+           
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-right: 20px;
+            object-fit:cover;
+
+            
+        }
+        /* new css added to reduce image height  */
+        /* #clip-image {
+            transform: translateY(-50px);         
+        } */
+        /* end of new css */
+
+        .section-with-image .section-content {
+            flex: 2;
+        }
+
+        @media (min-width: 768px) {
+            .section-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .section-content img.section-image {
+                max-width: 45%;
+                margin-right: 20px;
+            }
+            .section-content .text-content {
+                max-width: 50%;
+            }
+        }
+
+        #intro h3{
+            color:#00796b;
+        }
+        #div1{
+            padding-bottom: 15px ;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="menu-toggle" aria-label="Toggle Navigation">☰</button>
+        <h1>CementCare Awareness and Innovations</h1>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#intro">Home</a></li>
+                <!-- <li><a href="#effects">Effects</a></li> -->
+                <li><a href="#protection">Protection Against Hazards</a></li>
+                <li><a href="campaigns.html">Awareness Campaigns</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="more.html">More</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-image">
+        <div class="hero-overlay">
+            <div class="headline">Cement Exposure is Hazardous!</div>
+            <div class="headline">Be Aware And Use Protective Gear</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="intro" class="section">
+            <h2>Welcome</h2>
+            <p>Welcome to CementCare Awareness and Innovations, your trusted resource for safeguarding the health and well-being of construction workers, particularly those in rural areas. At CementCare Awareness and Innovations, safety and innovation come together to protect those who build our world.</br>Our mission is twofold:</p>
+            <div id="div1">
+                <h3>Awareness Campaigns</h3>
+                <p> We are dedicated to educating construction workers, especially in rural areas, about the harmful effects of cement exposure and the critical risks involved when protective gear is not used. Through comprehensive educational programs and outreach, we strive to ensure every worker is informed and protected.
+            </div>
+
+            <div>
+                <h3>Product Research and Development</h3> 
+                <p>Our commitment to safety extends to the research and development of high-quality protective gear and kits designed specifically for construction workers. 
+                    By prioritizing both education and innovation, we aim to create a safer, healthier work environment for all.</p>
+            </div>
+            <p>Explore our site to learn more about our initiatives and products that are making a difference in the construction industry.</p>
+            
+        </section>
+
+        <!-- <section id="effects" class="section">
+            <h2>Harmful Effects of Cement Exposure</h2>
+            <div class="section-content">
+                <img src="https://shorturl.at/YlZAy" alt="Cement exposure effects" class="section-image">
+                <div class="text-content">
+                    <p>Cement exposure can cause various health issues, including:</p>
+                    <ul>
+                        <li>Skin irritation and chemical burns</li>
+                        <li>Respiratory problems due to inhalation of cement dust</li>
+                        <li>Eye irritation and damage</li>
+                        <li>Allergic reactions and sensitization</li>
+                    </ul>
+                    <p>It is crucial to understand these risks to take appropriate measures to protect oneself.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="protection" class="section">
+            <h2>The Importance of Protective Gear</h2>
+            <div class="section-content">
+                <img src="https://shorturl.at/4ULzs" alt="Protective gear" class="section-image">
+                <div class="text-content">
+                    <p>Wearing the right protective gear can significantly reduce the harmful effects of cement exposure. Essential protective gear includes:</p>
+                    <ul>
+                        <li>Gloves</li>
+                        <li>Safety glasses or goggles</li>
+                        <li>Respirators or masks</li>
+                        <li>Protective clothing</li>
+                        <li>Footwear</li>
+                    </ul>
+                    <p>Always ensure you are fully equipped with the necessary protective gear before handling cement or working in environments where cement dust is present.</p>
+                </div>
+            </div>
+        </section> -->
+
+        <section id="effects" class="section-with-image">
+            <!-- <div class="crop-container"> -->
+            <img src="https://shorturl.at/YlZAy" alt="Cement exposure effects" class="beautiful-image" id="clip-image">
+            <!-- </div> -->
+            <div class="section-content">
+                <h2>Harmful Effects of Cement Exposure</h2>
+                <p>Cement exposure can cause various health issues, including:</p>
+                <ul>
+                    <li>Skin irritation, dryness and blisters and skin diseases such as dermatitis.</li>
+                    <li>Chemical burns ranging from mild to severe, potentially leading to higher-degree burns.</li>
+                    <li>Respiratory problems such as brochitis, silicosis and breathing difficulties due to inhalation of cement dust and chemicals.</li>
+                    <li>Eye irritation and damage potentially leading to conjunctivitis and corneal abrasion.</li>
+                    <li>Allergic reactions and sensitization.</li>
+                    <li>Lung cancer if subjected to chronic exposure.</li>
+                </ul>
+                <p>It is crucial to understand these risks to take appropriate measures to protect oneself.</p>
+            </div>
+        </section>
+        
+        <section id="protection" class="section-with-image">
+            <img src="https://shorturl.at/eoqb1" alt="Protective gear" class="beautiful-image">
+            <div class="section-content">
+                <h2>The Importance of Protective Gear</h2>
+                <p>Wearing the right protective gear can significantly reduce the harmful effects of cement exposure. Essential protective gear includes:</p>
+                <ul>
+                    <li>Gloves</li>
+                    <li>Safety glasses or goggles</li>
+                    <li>Respirators or masks</li>
+                    <li>Protective clothing</li>
+                    <li>Footwear</li>
+                </ul>
+                <p>Always ensure you are fully equipped with the necessary protective gear before handling cement or working in environments where cement dust is present.</p>
+            </div>
+        </section>
+
+
+
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need more information, please reach out to us:</p>
+            <ul>
+                <li>Email: info@cementcare.com</li>
+                <li>Phone: +91-834-567-8901</li>
+                <li>Address: IIT Delhi, Hauz Khaz, Pin code- 110016</li>
+            </ul>
+            <a href="mailto:info@cementcare.com" class="btn">Email Us</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CementCare Awareness and Innovations. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
